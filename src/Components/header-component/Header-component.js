@@ -1,26 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import "./header.css";
 import Moment from "react-moment";
 import Container from "@material-ui/core/Container";
 
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0px",
-    transform: "scale(0.8)",
-  },
-}));
-
 export default function Header() {
-  const classes = useStyles();
   const date = new Date();
 
   return (
