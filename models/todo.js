@@ -13,7 +13,10 @@ completed: {
   }
 }]
 
-const todoSchema = new mongoose.Schema(test
+const todoSchema = new mongoose.Schema({
+  title: String, 
+  completed: Boolean
+}
 )
 
 const todoModel = mongoose.model("Todo", todoSchema) 
