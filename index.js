@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 4000;
 const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
+
+var ObjectID = require("mongodb").ObjectID;
 /********************************************************** */
 
 const db = require("./config/driver");
@@ -21,15 +23,13 @@ db.initialize("todo", "items", function (dbCollection) {
       if (error) throw error;
       res.json(result);
     });
-    // return success(res, item);
+     return success(res, item);
   });
 
   /********************************************************** */
   app.post("/items", async (req, res, next) => {
     const item = req.body;
     dbCollection.insertOne(item, (error, result) => {
-      // callback of insertOne
-
       if (error) throw error;
       return success(res, item);
     });
@@ -62,10 +62,16 @@ db.initialize("todo", "items", function (dbCollection) {
 
   app.put("/items/:id", async (req, res, next) => {
     try {
-      const todo = await db.Todo.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-      });
-      return success(res, todo);
+      dbCollection
+        .updateOne(
+          { _id: ObjectID(req.body._id) },
+          { $set: { name: req.body.title, creator: req.body.creator } },
+          { upsert: true }
+        )
+
+        .catch((err) => {
+          console.log("Error: " + err);
+        });
     } catch (err) {
       next({ status: 400, message: "failed to update todo" });
     }
