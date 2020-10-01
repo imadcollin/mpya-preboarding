@@ -51,12 +51,18 @@ const App = () => {
   }
 
   const updateItem = async (e, id) => {
+    let payload = { title: "Untitled", creator: "Undefined" };
+
+    console.log(id);
     e.stopPropagation();
-    const payload = {
-      completed: !items.find((item) => item._id === id).completed,
-    };
+    if (items.find((item) => item._id === id)) {
+      payload = {
+        title: title,
+        creator: creator,
+      };
+    }
     const updatedTodo = await APIHelper.updateItem(id, payload);
-    setItem(items.map((item) => (item._id === id ? updatedTodo : item)));
+    setItems(items.map((item) => (item._id === id ? updatedTodo : item)));
   };
   {
     /************************************************************ */
@@ -103,11 +109,11 @@ const App = () => {
       </div>
       {/************************************************************ */}
       <ul>
-        {items.map(({ id, title, creator }, i) => (
-          <li key={i} onClick={(e) => updateItem(e, id)}>
-            <span onClick={(e) => deleteItem(e, id)}>
-              {title} {creator}
-            </span>
+        {items.map(({ _id, title, creator }, i) => (
+          <li key={i}>
+            {title} {creator}
+            <button onClick={(e) => updateItem(e, _id)}>Update Item</button>
+            <button onClick={(e) => deleteItem(e, _id)}>Delete Item</button>
           </li>
         ))}
       </ul>
