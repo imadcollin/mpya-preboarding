@@ -1,38 +1,37 @@
-
-
-let randomId = 1;
-
+let counter = 1;
 const items = [
   {
-    id: `${randomId}`,
+    id: 1,
     title: "Java",
     creator: " creator",
-  }];
+  },  {
+    id: 2,
+    title: "C++",
+    creator: " creator",
+  },
+];
 
 const getAllItems = () => items;
 
-const createItem = (title, creator) => {
+const createItem = (title,creator) => {
+  counter = counter + 1;
   return {
-    id: `${Math.floor(Math.random() * 10 + 1)}`,
+    id: `${counter}`,
     title: title,
-    creator: creator,
+    creator: creator
   };
 };
 
 const deleteItem = (id) => {
-	const del= items.filter((item)=>item.id==id);
-	items.splice(items.indexOf(del,1));
-}
+  const del = items.filter((item) => item.id == id);
+  items.splice(items.indexOf(del, 1));
+};
 
+const updateItem = (id, payload) => {
+  const find = items.filter((item) => item.id == id);
+  find.title = "Hard Code title ";
+  find.creator = "Hard code creator";
+  return find;
+};
 
-const updateItem=(id,payload) =>{
-	const find= items.filter((item)=>item.id==id)
-find.title="www";
-find.creator="ddd"; 
-return find;
-
-}
-
-export default { getAllItems, createItem ,deleteItem, updateItem};
-
-
+export default { getAllItems, createItem, deleteItem, updateItem };
