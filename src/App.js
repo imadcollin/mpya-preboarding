@@ -9,8 +9,8 @@ import MockApi from "./MockApi";
 
 const App = () => {
   const [items, setItems] = useState([]);
-  const [text, seText] = useState("");
-  const [creator, setCreator] = useState("");
+  const [titleState, setTitle] = useState("");
+  const [creatorState, setCreator] = useState("");
 
   useEffect(() => {
     const fetchGetAllItems = async () => {
@@ -32,11 +32,11 @@ const App = () => {
   {
     /************************************************************ */
   }
-  const addItem = ({ text,creator }) => {
-    if (!text) {
+  const addItem = ({ title, creator }) => {
+    if (!title) {
       alert("Please type something... ");
     } else {
-      const item = MockApi.createItem(text,creator);
+      const item = MockApi.createItem(title, creator);
       setItems((prev) => {
         return [item, ...prev];
       });
@@ -45,16 +45,17 @@ const App = () => {
   {
     /************************************************************ */
   }
-  const update = (id, title,creator, index) => {
+  const update = (id, title, creator, index) => {
     if (!title) {
       alert("Please type something... ");
     }
-    console.log("creator:");
+    console.log("creator:", creator);
+    console.log("title:", title);
 
     const found = items.filter((x) => x.id == id); //true false
     let newItems = [...items];
-    newItems[index].title = text;
-    newItems[index].creator = creator;
+    newItems[index].creator = creatorState;
+    newItems[index].title = titleState;
     setItems(newItems);
   };
   {
@@ -63,38 +64,31 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header"></header>
-      <h1>test</h1>
 
-      <div>
-        {items.map((item, index) => {
-          return (
-            <div key={index}>
-              -- {index}
-          {item.title} --- {item.creator}-{" "}
-            </div>
-          );
-        })}
-      </div>
       {/************************************************************ */}
-      {/* <Header></Header> */}
+      <div className="app-container">
+        <div className="flex-item">
+          <Header></Header>
+
+          {items.map((item, index) => (
+            <TodoList
+              item={item}
+              deleteItem={deleteItem}
+              update={update}
+              index={index}
+            ></TodoList>
+          ))}
+        </div>
+      </div>
+
       <Add
         items={items}
-        text={text}
-        creator={creator}
-        onTextChanged={seText}
+        title={titleState}
+        creator={creatorState}
+        onTextChanged={setTitle}
         onCreatorChanged={setCreator}
-
         addItem={addItem}
       ></Add>
-
-      {items.map((item, index) => (
-        <TodoList
-          item={item}
-          deleteItem={deleteItem}
-          update={update}
-          index={index}
-        ></TodoList>
-      ))}
 
       {/* <Crud></Crud> */}
     </div>
