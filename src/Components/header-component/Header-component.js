@@ -14,42 +14,20 @@ export default function Header() {
     <div className="header-style">
       <h1>This is a header</h1>
 
-      <br />
-      <Container maxWidth="sm">
-        <h2>Grid container</h2>
-        <Grid container>
-          <Grid item xs={2}>
-            <span
-              className="day"
-              style={{
-                textAlign: "right",
-                fontSize: "80px",
-                fontFamily: "bold",
-              }}
-            >
-              <Moment format="DD">{date}</Moment>
-            </span>
-          </Grid>
-
-          <Grid item xs={2}>
-            <Typography variant="h5" component="h1">
-              <span className="month">
-                <Moment format="MMM">{date}</Moment>
-              </span>
-            </Typography>
-
-            <h2 className="year">
-              <Moment format="YYYY">{date}</Moment>
-            </h2>
-          </Grid>
-
-          <Grid item xs={8}>
-            <h1 className="dd" style={{ lineHeight: "2.5" }}>
-              <Moment format="dd">{date}</Moment>
-            </h1>
-          </Grid>
-        </Grid>
-      </Container>
+      <div className="grid">
+        <span className="grid-item item1">
+          <Moment format="DD">{date}</Moment>
+        </span>
+        <span className="grid-item item2">
+          <Moment format="MMM">{date}</Moment>
+        </span>
+        <span className="grid-item item3">
+          <Moment format="YYYY">{date}</Moment>
+        </span>
+        <span className="grid-item item4">
+          <Moment format="dddd">{date}</Moment>
+        </span>
+      </div>
     </div>
   );
 }
