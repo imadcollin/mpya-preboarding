@@ -6,11 +6,13 @@ import "./App.css";
 
 import Crud from "./Crud";
 import MockApi from "./MockApi";
-
+import AddIcon from "./Components/header-component/Add-icon";
 const App = () => {
   const [items, setItems] = useState([]);
   const [titleState, setTitle] = useState("");
   const [creatorState, setCreator] = useState("");
+
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
     const fetchGetAllItems = async () => {
@@ -46,6 +48,7 @@ const App = () => {
     /************************************************************ */
   }
   const update = (id, title, creator, index) => {
+    handleShow();
     if (!title) {
       alert("Please type something... ");
     }
@@ -61,34 +64,50 @@ const App = () => {
   {
     /************************************************************ */
   }
+
+  const handleShow = () => {
+    setIsActive(!isActive);
+  };
+  {
+    /************************************************************ */
+  }
+
   return (
     <div className="App">
       <header className="App-header"></header>
-
       {/************************************************************ */}
       <div className="app-container">
         <div className="flex-item">
-          <Header></Header>
+          {isActive ? (
+            <div>
+              <Header></Header>
 
-          {items.map((item, index) => (
-            <TodoList
-              item={item}
-              deleteItem={deleteItem}
-              update={update}
-              index={index}
-            ></TodoList>
-          ))}
+              <TodoList
+                items={items}
+                deleteItem={deleteItem}
+                update={update}
+              ></TodoList>
+              <span onClick={handleShow}>
+                <AddIcon></AddIcon>
+              </span>
+            </div>
+          ) : null}
         </div>
       </div>
 
-      <Add
-        items={items}
-        title={titleState}
-        creator={creatorState}
-        onTextChanged={setTitle}
-        onCreatorChanged={setCreator}
-        addItem={addItem}
-      ></Add>
+      {!isActive ? (
+        <div>
+          <Add
+            items={items}
+            title={titleState}
+            creator={creatorState}
+            onTextChanged={setTitle}
+            onCreatorChanged={setCreator}
+            addItem={addItem}
+            handle={handleShow}
+          ></Add>
+        </div>
+      ) : null}
 
       {/* <Crud></Crud> */}
     </div>

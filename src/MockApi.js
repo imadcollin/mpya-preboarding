@@ -3,11 +3,11 @@ const items = [
   {
     id: 1,
     title: "Java",
-    creator: " creator",
+    creator: " Mick",
   },  {
     id: 2,
     title: "C++",
-    creator: " creator",
+    creator: " Olof",
   },
 ];
 
