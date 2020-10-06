@@ -12,7 +12,6 @@ export default function Header() {
 
   return (
     <div className="header-style">
-      <h1>This is a header</h1>
 
       <div className="grid">
         <span className="grid-item item1">

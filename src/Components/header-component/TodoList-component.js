@@ -11,32 +11,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TodoList = ({ item, deleteItem, update, index }) => {
+const TodoList = ({ items, deleteItem, update, index }) => {
   const classes = useStyles();
 
   return (
     <div>
       <List component="nav" className={classes.root} aria-label="contacts">
-        <ListItem button>
-          <ListItemText primary={item.title} secondary={item.creator} />{" "}
-          <EditIcon
-            style={{
-              color: "black",
-              backgroundColor: "white",
-              fontSize: "2rem",
-            }}
-            onClick={() => update(item.id, item.title, item.creator, index)}
-          ></EditIcon>
-          <span>&nbsp;&nbsp;</span>
-          <CancelIcon
-            style={{
-              color: "white",
-              backgroundColor: "red",
-              borderRadius: "50%",
-            }}
-            onClick={() => deleteItem(item.id)}
-          ></CancelIcon>
-        </ListItem>
+        {items.map((item, index) => (
+          <ListItem button>
+            <ListItemText primary={item.title} secondary={item.creator} />{" "}
+            <EditIcon
+              style={{
+                color: "black",
+                backgroundColor: "white",
+                fontSize: "2rem",
+              }}
+              onClick={() => update(item.id, item.title, item.creator, index)}
+            ></EditIcon>
+            <span>&nbsp;&nbsp;</span>
+            <CancelIcon
+              style={{
+                color: "white",
+                backgroundColor: "red",
+                borderRadius: "50%",
+              }}
+              onClick={() => deleteItem(item.id)}
+            ></CancelIcon>
+          </ListItem>
+        ))}
       </List>
     </div>
   );
