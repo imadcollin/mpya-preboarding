@@ -70,7 +70,7 @@ const App = () => {
 
   return (
     <div className="App">
-    <header className="App-header"></header>
+      <header className="App-header"></header>
       {/************************************************************ */}
       <div className="app-container">
         <div className="flex-item">
@@ -102,7 +102,7 @@ const App = () => {
               ></Add>
             </div>
           ) : null}
-
+          {/* Integrated with Mlab */}
           {/* <Crud></Crud> */}
         </div>
       </div>
