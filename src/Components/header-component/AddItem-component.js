@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { green } from "@material-ui/core/colors";
-import Icon from "@material-ui/core/Icon";
 import AddIcon from "./Add-icon";
 const Add = ({
   items,
@@ -13,18 +10,6 @@ const Add = ({
   onCreatorChanged,
   handle,
 }) => {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-        backgroundColor: "#fff",
-        padding: "20%",
-      },
-    },
-  }));
-
-  const classes = useStyles();
   const clicks = () => {
     addItem({ title, creator });
     handle(true);

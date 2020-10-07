@@ -18,8 +18,8 @@ const TodoList = ({ items, deleteItem, update, index }) => {
     <div>
       <List component="nav" className={classes.root} aria-label="contacts">
         {items.map((item, index) => (
-          <ListItem button>
-            <ListItemText primary={item.title} secondary={item.creator} />{" "}
+          <ListItem key={index} button>
+            <ListItemText  primary={item.title} secondary={item.creator} />{" "}
             <EditIcon
               style={{
                 color: "black",

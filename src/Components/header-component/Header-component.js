@@ -1,12 +1,6 @@
 import React from "react";
 import "./header.css";
 import Moment from "react-moment";
-import Container from "@material-ui/core/Container";
-
-import Grid from "@material-ui/core/Grid";
-
-import Typography from "@material-ui/core/Typography";
-
 export default function Header() {
   const date = new Date();
 

@@ -23,12 +23,12 @@ const createItem = (title,creator) => {
 };
 
 const deleteItem = (id) => {
-  const del = items.filter((item) => item.id == id);
+  const del = items.filter((item) => item.id === id);
   items.splice(items.indexOf(del, 1));
 };
 
 const updateItem = (id, payload) => {
-  const find = items.filter((item) => item.id == id);
+  const find = items.filter((item) => item.id === id);
   find.title = "Hard Code title ";
   find.creator = "Hard code creator";
   return find;

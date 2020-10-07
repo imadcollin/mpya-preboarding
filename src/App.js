@@ -48,14 +48,10 @@ const App = () => {
     /************************************************************ */
   }
   const update = (id, title, creator, index) => {
+    setCreator(null);
+    setTitle(null);
     handleShow();
-    if (!title) {
-      alert("Please type something... ");
-    }
-    console.log("creator:", creator);
-    console.log("title:", title);
 
-    const found = items.filter((x) => x.id == id); //true false
     let newItems = [...items];
     newItems[index].creator = creatorState;
     newItems[index].title = titleState;
@@ -74,42 +70,42 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
+    <header className="App-header"></header>
       {/************************************************************ */}
       <div className="app-container">
         <div className="flex-item">
-          {isActive ? (
-            <div>
-              <Header></Header>
+          <div>
+            <Header></Header>
 
-              <TodoList
-                items={items}
-                deleteItem={deleteItem}
-                update={update}
-              ></TodoList>
+            <TodoList
+              items={items}
+              deleteItem={deleteItem}
+              update={update}
+            ></TodoList>
+            {isActive ? (
               <span onClick={handleShow}>
                 <AddIcon></AddIcon>
               </span>
+            ) : null}
+          </div>
+
+          {!isActive ? (
+            <div>
+              <Add
+                items={items}
+                title={titleState}
+                creator={creatorState}
+                onTextChanged={setTitle}
+                onCreatorChanged={setCreator}
+                addItem={addItem}
+                handle={handleShow}
+              ></Add>
             </div>
           ) : null}
+
+          {/* <Crud></Crud> */}
         </div>
       </div>
-
-      {!isActive ? (
-        <div>
-          <Add
-            items={items}
-            title={titleState}
-            creator={creatorState}
-            onTextChanged={setTitle}
-            onCreatorChanged={setCreator}
-            addItem={addItem}
-            handle={handleShow}
-          ></Add>
-        </div>
-      ) : null}
-
-      {/* <Crud></Crud> */}
     </div>
   );
 };
