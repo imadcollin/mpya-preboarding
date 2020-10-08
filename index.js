@@ -19,11 +19,11 @@ db.initialize("todo", "items", function (dbCollection) {
 
   /********************************************************** */
   app.get("/items", async (req, res, next) => {
-    dbCollection.find().toArray((error, result) => {
+   const item= dbCollection.find().toArray((error, result) => {
       if (error) throw error;
       res.json(result);
     });
-     return success(res, item);
+   // return success(res, item);
   });
 
   /********************************************************** */
@@ -61,16 +61,16 @@ db.initialize("todo", "items", function (dbCollection) {
   /********************************************************** */
 
   app.put("/items/:id", async (req, res, next) => {
+    const itemId=req.params.id; 
     try {
       dbCollection
         .updateOne(
           { _id: ObjectID(req.body._id) },
-          { $set: { name: req.body.title, creator: req.body.creator } },
-          { upsert: true }
-        )
-
-        .catch((err) => {
-          console.log("Error: " + err);
+          { $set: { title: req.body.title, creator: req.body.creator } },
+          { upsert: true });
+        const item = dbCollection.findOne({ id: itemId }, (error, result) => {
+          if (error) throw error;
+          return success(res, "updated");
         });
     } catch (err) {
       next({ status: 400, message: "failed to update todo" });
